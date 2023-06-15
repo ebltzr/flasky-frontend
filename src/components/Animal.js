@@ -2,14 +2,25 @@
 // add age, photo(optional?) -- or default?
 
 import './Animal.css';
+import PropTypes from 'prop-types';
 
+// The responsibility of this component is to be a reusable UI element that displays an Animal's
 const Animal = (props) => {
+
     return (
     <section className="Animal">
-            <h3>Animal name: { props.name } (cute!)</h3>
-            <p>Species: { props.species }</p>
-            <img src='https://placekitten.com/g/200/300' alt='Photo of cat' ></img>
-        </section>);
+        <h3>Name: { props.name } (cute!)</h3>
+        <p>Species: { props.species }</p>
+        { props.photo ? <img src={ props.photo } alt="Photo of Willow"></img> : "[No Photo]" }
+    </section>);
 };
+
+Animal.propTypes = {
+    name: PropTypes.string,
+    species: PropTypes.string.isRequired,
+    adopted: PropTypes.bool,
+    age: PropTypes.number,
+    photo: PropTypes.string
+}
 
 export default Animal;
