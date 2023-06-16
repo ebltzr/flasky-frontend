@@ -1,7 +1,10 @@
 .AnimalList {
     color: blue;
+    padding: 0 15vw;
 }
 
 .AnimalList__list {
     list-style-type: none;
+     /* display: flex;
+    flex-wrap: wrap; */
 }
