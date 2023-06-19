@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 
 import Animal from './Animal';
 
-const AnimalList = ({ listOfAnimals }) => {
+const AnimalList = ( props ) => {
+    //const AnimalList = ({ listOfAnimals }) => {
     // If the parameter is props instead, you can do these!
-    // const listOfAnimals = props.listOfAnimals;
-    // const { listOfAnimals } = props;
+    // const { listOfAnimals } = props.listOfAnimals;
+    const listOfAnimals  = props.listOfAnimals;
+    // const {listOfAnimals} = props;
+
+    console.log(props);
 
     return (
     <section className="AnimalList">
@@ -21,9 +25,15 @@ const AnimalList = ({ listOfAnimals }) => {
                 listOfAnimals.map((creature) => (
                     <li key={creature.id}>
                         <Animal
+                            id = { creature.id }
                             name={ creature.name }
                             species={ creature.species }
                             photo={ creature.photo }
+                            isBookmarked = {creature.isBookmarked}
+                            // updateBookmark={creature.updateBookmark}
+                            updateBookmark = { props.updateBookmark }
+                            updateDelete = {props.updateDelete}
+                            
                         />
                     </li>)
                 ) 
@@ -41,9 +51,16 @@ AnimalList.propTypes = {
             species: PropTypes.string.isRequired,
             adopted: PropTypes.bool,
             age: PropTypes.number,
-            photo: PropTypes.string
+            photo: PropTypes.string,
+            // updateBookmark: PropTypes.func -- not required
+            isBookmarked: PropTypes.bool,
         })
-    )
+    ), 
+    // pass it once at the updateBookmark level -- instead of 5 other times in listOfAnimals -- will not break if you put after photo
+    updateBookmark: PropTypes.func,
+    updateDelete: PropTypes.func
+
+
 }
 
 export default AnimalList;

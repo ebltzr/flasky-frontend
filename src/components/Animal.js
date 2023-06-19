@@ -1,50 +1,38 @@
 //The responsibilty of this component is to be a resuable UI element that displays an Animals name, species, photo
 // add age, photo(optional?) -- or default?
 
+
+
 import './Animal.css';
-import PropTypes from 'prop-types';
 
 import { useState } from 'react';
 
-// [X] Make the element that the user interacts with
-// [X] Make the event handler for that element
-// [X] Configure a piece of state:
-    // Decide what the state is... what is its name, what is its type, what are the available values for this
-        // isBookmarked ... true or false
-        // likesCount ... numbers 0+
-        // biography ... {birthYear:, works:}
-    // import useState
-    // Render the piece of state with an initial value
-        // setIsBookmarked
-        // false
-    // Make the event handler update the state
-// [X] Test it
-// [X] Refactor
-// [] Style it/add polish
-
-
-
-// Refactor to toggle:
-// Rename my functions
-// Redo the logic
-
-// The responsibility of this component is to be a reusable UI element that displays an Animal's
+import PropTypes from 'prop-types';
 
 
 // The responsibility of this component is to be a reusable UI element that displays an Animal's
 const Animal = (props) => {
 
-    const [isBookmarked, setIsBookmarked] = useState(false);
+    const [isBookmarked, setIsBookmarked] = useState(props.isBookmarked);
+    //const [isBookmarked, setIsBookmarked] = useState(false);
 
-    const altText = `Photo of ${props.name}`;
+    // const altText = `Photo of ${props.name}`;
 
     // Responsibility:
     // Event Handler
     // Update the state
 
     const toggleBookmark = () => {
+        // we want event handler to do two things: 
+            // update that info to SSOT -- single source of truth
+            // update components internal state
         setIsBookmarked(!isBookmarked);
+        // props.updateBookmark()
+        // props.updateBookmark(props.name, setIsBookmarked)
+        props.updateBookmark(props.id);
     }
+
+    const altText = `Photo of ${props.name}`;
 
      // If the animal is bookmarked, the CSS class name should be
     //   .bookmarked
@@ -55,6 +43,10 @@ const Animal = (props) => {
         animalStyle = 'Animal bookmarked';
     }
 
+    const toggleDelete = () => {
+        console.log("toggle Delete is called!")
+        props.updateDelete(props.id)
+    }
 
     return (
         <section className={animalStyle}>
@@ -65,18 +57,25 @@ const Animal = (props) => {
    
         <h3>Name: { props.name }</h3>
         <p>Species: { props.species }</p>
+
         <button onClick={toggleBookmark} className="bookmark-button">🌟 Bookmark</button>
-   
+        <button onClick={toggleDelete} className="delete-button">🐶 Delete </button>
+
     </section>);
     
 };
-
+// don't actually have to use proptypes code can run without --
 Animal.propTypes = {
     name: PropTypes.string,
     species: PropTypes.string.isRequired,
     adopted: PropTypes.bool,
     age: PropTypes.number,
-    photo: PropTypes.string
+    photo: PropTypes.string,
+    isBookmarked: PropTypes.bool,
+    updateBookmark: PropTypes.func,
+    updateDelete: PropTypes.func,
+
+
 }
 
 export default Animal;
