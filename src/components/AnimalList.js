@@ -3,12 +3,10 @@ import PropTypes from 'prop-types';
 
 import Animal from './Animal';
 
-const AnimalList = ( props ) => {
-    //const AnimalList = ({ listOfAnimals }) => {
+const AnimalList = (props) => {
     // If the parameter is props instead, you can do these!
-    // const { listOfAnimals } = props.listOfAnimals;
-    const listOfAnimals  = props.listOfAnimals;
-    // const {listOfAnimals} = props;
+    const listOfAnimals = props.listOfAnimals;
+    // const { listOfAnimals } = props;
 
     console.log(props);
 
@@ -17,11 +15,9 @@ const AnimalList = ( props ) => {
         <h2>Animal List</h2>
         <ul className="AnimalList__list">
             {
-
-             // This embedded JSX snippet is responsible for
+                // This embedded JSX snippet is responsible for
                 // 1. Reading the prop named listOfAnimals
-                // 2. Generating an <li> element for each creature in listOfAnimals    
-
+                // 2. Generating an <li> element for each creature in listOfAnimals
                 listOfAnimals.map((creature) => (
                     <li key={creature.id}>
                         <Animal
@@ -29,11 +25,9 @@ const AnimalList = ( props ) => {
                             name={ creature.name }
                             species={ creature.species }
                             photo={ creature.photo }
-                            isBookmarked = {creature.isBookmarked}
-                            // updateBookmark={creature.updateBookmark}
+                            isBookmarked = { creature.isBookmarked }
                             updateBookmark = { props.updateBookmark }
-                            updateDelete = {props.updateDelete}
-                            
+                            updateDelete = { props.updateDelete }
                         />
                     </li>)
                 ) 
@@ -52,15 +46,11 @@ AnimalList.propTypes = {
             adopted: PropTypes.bool,
             age: PropTypes.number,
             photo: PropTypes.string,
-            // updateBookmark: PropTypes.func -- not required
-            isBookmarked: PropTypes.bool,
+            isBookmarked: PropTypes.bool
         })
     ), 
-    // pass it once at the updateBookmark level -- instead of 5 other times in listOfAnimals -- will not break if you put after photo
     updateBookmark: PropTypes.func,
     updateDelete: PropTypes.func
-
-
 }
 
 export default AnimalList;
