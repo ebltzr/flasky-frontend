@@ -1,13 +1,11 @@
 import { useState } from "react";
 import './App.css';
 import AnimalList from './components/AnimalList';
-
 const INITIAL_ANIMALS = [
   {
     id: 100,
     name: "Violet",
     species: "pitbull mix",
-    // isBookmarked: false,
     isBookmarked: true,
   },
   {
@@ -38,19 +36,13 @@ const INITIAL_ANIMALS = [
     isBookmarked: false,
   },
 ];
-
 function App() {
   const [animals, setAnimals] = useState(INITIAL_ANIMALS);
-
   const updateBookmark = (animalId) => {
-
     // create a new list of animals with updated bookmark value
     const updatedAnimals = animals.map(animal => {
       if (animal.id === animalId) {
-      //   animal.isBookmarked = !animal.isBookmarked;
-      // };
-      // return {...animal}
-     // Method 1: Copy then modify.
+        // Method 1: Copy then modify.
         // let animal2 = {...animal};
         // animal2.isBookmarked = !animal.isBookmarked;
         // return animal2;
@@ -63,28 +55,22 @@ function App() {
       }
 
       return animal;
-
     });
 
     setAnimals(updatedAnimals);
   }
-
   const updateDelete = (animalId) => {
     const updatedAnimals = animals.map((animal) => {
       if (animal.id !== animalId) {
         return { ...animal };
       }
     });
-    
     // taken from https://stackoverflow.com/questions/28607451/removing-undefined-values-from-array
     const filteredUpdatedData = updatedAnimals.filter(function (element) {
       return element !== undefined;
     });
-
     setAnimals(filteredUpdatedData);
   }
-
-
   // Comments outside of JSX (but still in JavaScript (aka JS that is not "returned")) can still be //'s.
   return (
     <section>
@@ -97,5 +83,4 @@ function App() {
     </section>
   );
 }
-
 export default App;
